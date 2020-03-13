@@ -76,4 +76,8 @@ button:hover {
   -webkit-box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
           box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
+
+.error {
+  color: lightcoral;
+}
 /*# sourceMappingURL=index.css.map */

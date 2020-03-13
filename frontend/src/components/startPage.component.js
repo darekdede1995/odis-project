@@ -12,24 +12,28 @@ function StartPage() {
     return (
         <div className="start-container">
             <div className="button-group">
-                <button className={login ? 'selected-button' : ''} onClick={loginToggle}>LOGIN</button>
+                <button className={login ? 'selected-button' : ''} onClick={loginToggle} >LOGIN</button>
                 <button className={register ? 'selected-button' : ''} onClick={registerToggle}>REGISTER</button>
             </div>
             <div hidden={!login}>
                 <LoginForm />
             </div>
             <div hidden={!register}>
-                <RegisterForm />
+                <RegisterForm onSubmit={loginToggle} />
             </div>
         </div>
     );
 
-    function loginToggle() {
+    function loginToggle(e) {
+        if (e) {
+            e.preventDefault();
+        }
         setLogin(!login);
         setRegister(false);
     }
 
-    function registerToggle() {
+    function registerToggle(e) {
+        e.preventDefault();
         setRegister(!register);
         setLogin(false);
     }
