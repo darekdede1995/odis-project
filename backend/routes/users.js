@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Task = require('../models/task.model');
+let User = require('../models/user.model');
 
 router.route("/login").post((req, res) => {
     const username = req.body.username;
@@ -16,6 +16,10 @@ router.route("/login").post((req, res) => {
             if (!user.validPassword(password)) {
                 return res.status(400).json("Wrong password");
             }
+
+            return res.send({
+                user: users[0]
+            });
 
         })
         .catch(err => {
