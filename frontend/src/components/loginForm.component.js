@@ -2,6 +2,7 @@ import React from 'react';
 import "../styles/index.css";
 import axios from "axios";
 import { useState } from 'react';
+import { setInStorage, getFromStorage } from '../utils/storage';
 
 
 function LoginForm() {
@@ -9,7 +10,7 @@ function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-
+    const localStorage = getFromStorage('odis-token');
 
     return (
         <div className="login-container">
@@ -45,14 +46,11 @@ function LoginForm() {
                 .then(res => {
                     setUsername('');
                     setPassword('');
-                    setMessage('zalogowalem cie mordo ' + res.data.user.username);
-                    //   if (res.data.success) {
-                    //     setInStorage("exercise-tracker", {
-                    //       userSession: res.data.userSession
-                    //     });
-                    //     fetchData(res.data.userSession.userid);
-                    //     setRedirect(true);
-                    //   }
+                    if (res.data.success) {
+                        setInStorage("odis-token", {
+                            user: res.data.user
+                        });
+                    }
                 })
                 .catch(error => {
                     setMessage(error.response.data);

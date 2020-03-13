@@ -53,13 +53,6 @@ function RegisterForm(props) {
                     props.onSubmit();
                     setUsername('');
                     setPassword('');
-                    //   if (res.data.success) {
-                    //     setInStorage("exercise-tracker", {
-                    //       userSession: res.data.userSession
-                    //     });
-                    //     fetchData(res.data.userSession.userid);
-                    //     setRedirect(true);
-                    //   }
                 })
                 .catch(error => {
                     console.log(error);

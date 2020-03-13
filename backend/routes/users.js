@@ -18,6 +18,7 @@ router.route("/login").post((req, res) => {
             }
 
             return res.send({
+                success: true,
                 user: users[0]
             });
 

@@ -14,14 +14,14 @@ router.route('/add').post((req, res) => {
     const description = req.body.description;
     const userid = req.body.userid;
 
-    const newTask = new Group({
+    const newTask = new Task({
         userid: userid,
         description: description,
         finished: false
     });
 
     newTask.save()
-        .then((group) => res.json(group))
+        .then((task) => res.json(task))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
