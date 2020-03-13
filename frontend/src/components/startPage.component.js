@@ -3,6 +3,7 @@ import "../styles/index.css";
 import { useState } from 'react';
 import LoginForm from "./loginForm.component";
 import RegisterForm from "./registerForm.component";
+import { Link } from 'react-router-dom';
 
 function StartPage() {
 
@@ -12,6 +13,9 @@ function StartPage() {
     return (
         <div className="start-container">
             <div className="button-group">
+                <Link className={(window.location.pathname === '/exercises-list' ? "nav-link selected-link" : "nav-link")} to="/list">
+                przycisk roboczy
+                </Link>
                 <button className={login ? 'selected-button' : ''} onClick={loginToggle} >LOGIN</button>
                 <button className={register ? 'selected-button' : ''} onClick={registerToggle}>REGISTER</button>
             </div>
