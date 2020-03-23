@@ -1,46 +1,62 @@
 import React from 'react';
-import "../styles/index.css";
+import '../styles/index.css';
 import { useState } from 'react';
-import LoginForm from "./loginForm.component";
-import RegisterForm from "./registerForm.component";
+import LoginForm from './loginForm.component';
+import RegisterForm from './registerForm.component';
 import { Link } from 'react-router-dom';
 
 function StartPage() {
+  const [login, setLogin] = useState(false);
+  const [register, setRegister] = useState(false);
 
-    const [login, setLogin] = useState(false);
-    const [register, setRegister] = useState(false);
+  return (
+    <div className="start-container">
+      <div className="button-group">
+        <Link
+          className={
+            window.location.pathname === '/exercises-list'
+              ? 'nav-link selected-link'
+              : 'nav-link'
+          }
+          to="/list"
+        >
+          przycisk roboczy
+        </Link>
+        <button
+          className={login ? 'selected-button' : ''}
+          onClick={loginToggle}
+        >
+          LOGIN
+        </button>
+        <button
+          className={register ? 'selected-button' : ''}
+          onClick={registerToggle}
+        >
+          REGISTER
+        </button>
+      </div>
+      <div hidden={!login}>
+        <LoginForm />
+      </div>
+      <div hidden={!register}>
+        <RegisterForm onSubmit={loginToggle} />
+      </div>
+    </div>
+  );
 
-    return (
-        <div className="start-container">
-            <div className="button-group">
-                <Link className={(window.location.pathname === '/exercises-list' ? "nav-link selected-link" : "nav-link")} to="/list">
-                przycisk roboczy
-                </Link>
-                <button className={login ? 'selected-button' : ''} onClick={loginToggle} >LOGIN</button>
-                <button className={register ? 'selected-button' : ''} onClick={registerToggle}>REGISTER</button>
-            </div>
-            <div hidden={!login}>
-                <LoginForm />
-            </div>
-            <div hidden={!register}>
-                <RegisterForm onSubmit={loginToggle} />
-            </div>
-        </div>
-    );
-
-    function loginToggle(e) {
-        if (e) {
-            e.preventDefault();
-        }
-        setLogin(!login);
-        setRegister(false);
+  function loginToggle(e) {
+    if (e) {
+      e.preventDefault();
     }
+    setLogin(!login);
+    setRegister(false);
+  }
 
-    function registerToggle(e) {
-        e.preventDefault();
-        setRegister(!register);
-        setLogin(false);
-    }
+  function registerToggle(e) {
+    e.preventDefault();
+    setRegister(!register);
+    setLogin(false);
+  }
 }
 
 export default StartPage;

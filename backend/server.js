@@ -1,6 +1,6 @@
-const express = require('express')
-const cors = require('cors')
-const mongoose = require('mongoose')
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const path = require('path');
 
 require('dotenv').config();
@@ -20,8 +20,8 @@ mongoose.connect(uri, {
 
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('MongoDB connection established succesfully')
-})
+    console.log('MongoDB connection established succesfully');
+});
 
 const userRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');

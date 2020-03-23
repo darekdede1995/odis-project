@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import StartPage from "./components/startPage.component";
-import ListPage from "./components/listPage.component";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import StartPage from './components/startPage.component';
+import ListPage from './components/listPage.component';
 import './App.css';
 
 function App() {
