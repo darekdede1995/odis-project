@@ -12,15 +12,23 @@ function StartPage() {
   return (
     <div className="start-container">
       <div className="button-group">
-        <Link
-          className={
-            window.location.pathname === '/exercises-list'
-              ? 'nav-link selected-link'
-              : 'nav-link'
-          }
-          to="/list">
-          przycisk roboczy
-        </Link>
+        <button>
+          <Link
+            to="/comments">
+            Komentarze
+          </Link>
+        </button>
+        <button>
+          <Link
+            className={
+              window.location.pathname === '/exercises-list'
+                ? 'nav-link selected-link'
+                : 'nav-link'
+            }
+            to="/list">
+            przycisk roboczy
+          </Link>
+        </button>
         <button
           className={login ? 'selected-button' : ''}
           onClick={loginToggle}>

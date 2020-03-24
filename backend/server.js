@@ -13,29 +13,31 @@ app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('MongoDB connection established succesfully');
+  console.log('MongoDB connection established succesfully');
 });
 
 const userRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');
+const commentsRoutes = require('./routes/comments');
 
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', tasksRoutes);
+app.use('/api/comments', commentsRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/../frontend/build')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname + '/../frontend/build/index.html'));
-    });
+  app.use(express.static(path.join(__dirname, '/../frontend/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../frontend/build/index.html'));
+  });
 }
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
