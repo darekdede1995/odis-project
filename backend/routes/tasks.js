@@ -34,10 +34,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Task.findById(req.params.id)
     .then(task => {
-      task.userid = req.body.userid;
-      task.description = req.body.description;
       task.finished = req.body.finished;
-
       task
         .save()
         .then(task => res.json(task))
