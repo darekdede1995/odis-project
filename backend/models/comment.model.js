@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  userid: {
+  username: {
     type: String,
     required: true
   },
@@ -12,6 +12,6 @@ const CommentSchema = new Schema({
   }
 });
 
-const Task = mongoose.model('Task', CommentSchema);
+const Comment = mongoose.model('Comment', CommentSchema);
 
-module.exports = Task;
+module.exports = Comment;
