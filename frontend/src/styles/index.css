@@ -1,37 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Anton&display=swap");
-.button-group {
-  width: 100%;
+.security__container {
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
 }
 
-button,
-.selected-button {
-  font-family: 'Anton', sans-serif;
-  font-size: 2rem;
-  border: 2px solid lightgray;
-  width: auto;
-  margin: 2%;
-  padding: 1%;
-  border-radius: 15px;
-  -webkit-box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
-          box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+.security__container button {
+  padding: 10px;
 }
 
-button {
-  color: black;
-  background: transparent;
+.security-list__container {
+  text-align: left;
+  width: 30%;
 }
 
-button:hover {
-  background: rgba(0, 0, 0, 0.1);
+.security-list__container ul li {
+  padding: 2% 0% 2% 0%;
+  text-decoration: none;
+  list-style: none;
+  font-size: 1.5em;
 }
 
-.selected-button {
-  color: white;
-  background: black;
+.security-list__container ul li:hover {
+  color: gray;
+  cursor: pointer;
 }
 
-.selected-button:hover {
-  background: rgba(0, 0, 0, 0.7);
+.error {
+  color: lightcoral;
 }
 
 .start-container {
@@ -144,7 +140,43 @@ button:hover {
   color: red;
 }
 
-.error {
-  color: lightcoral;
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.button-group {
+  width: 100%;
+}
+
+button,
+.selected-button {
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+  border: 2px solid lightgray;
+  width: auto;
+  margin: 2%;
+  padding: 1%;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  color: black;
+  background: transparent;
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.selected-button {
+  color: white;
+  background: black;
+}
+
+.selected-button:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 /*# sourceMappingURL=index.css.map */

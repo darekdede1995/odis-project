@@ -1,0 +1,15 @@
+.security-list__container {
+  text-align: left;
+  width: 30%;
+}
+
+.security-list__container ul li {
+  padding: 2% 0% 2% 0%;
+  text-decoration: none;
+  list-style: none;
+  font-size: 1.5em;
+  &:hover {
+    color: gray;
+    cursor: pointer;
+  }
+}
