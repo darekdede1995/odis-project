@@ -10,18 +10,24 @@ import './App.css';
 import { getFromStorage } from './utils/storage';
 import axios from 'axios';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
   const [secure, setSecure] = useState(true);
+  const [verified, setVerified] = useState(false);
   const odisUser = getFromStorage('odis-user');
   const odisSession = getFromStorage('odis-session');
+
+  useEffect(() => {
+    verify();
+  }, []);
 
   if (secure) {
     return (
       <div className="App">
         <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
         <SecurityList />
-        {logged(verify())}
+        {logged(verified)}
       </div>
     );
   } else {
@@ -53,17 +59,18 @@ function App() {
   function verify() {
     if (odisSession) {
       axios
-        .post(process.env.REACT_APP_API_URL + '/api/userSession/verify', {
-          session: odisSession.userSession
-        })
+        .post(
+          process.env.REACT_APP_API_URL + '/api/userSession/verify',
+          odisSession
+        )
         .then(res => {
-          return res.data.success;
+          setVerified(res.data.success);
         })
         .catch(error => {
           console.log(error.response.data);
         });
     } else {
-      return false;
+      setVerified(false);
     }
   }
 

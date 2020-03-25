@@ -66,7 +66,6 @@ function ListPage(props) {
           console.log(error);
         });
     } else {
-      console.log(odisUser._id);
       axios
         .get(
           process.env.REACT_APP_API_URL +
