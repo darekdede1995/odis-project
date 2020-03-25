@@ -58,10 +58,6 @@ function App() {
     } else {
       return (
         <BrowserRouter>
-          <Route
-            path="/comments"
-            component={() => <CommentsPage isSecure={secure} />}
-          />
           <Switch>
             <Route
               path="/comments"
