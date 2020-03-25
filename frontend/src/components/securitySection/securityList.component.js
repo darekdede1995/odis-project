@@ -4,6 +4,22 @@ import '../../styles/index.css';
 
 function SecurityList() {
   const [showInfo, setShowInfo] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  const description = [
+    {},
+    { title: 'SQL Injections', content: 'Wstrzykiwanie SQL' },
+    { title: 'Cross Site Scripting (XSS)', content: '' },
+    {
+      title: 'Broken Authentication & Session Management - IdentityManager',
+      content: ''
+    },
+    {
+      title: 'Insecure Direct Object References - DOM (Document Object Model)',
+      content: ''
+    },
+    { title: 'Cross-Site Request Forgery (CSRF)', content: '' }
+  ];
 
   return (
     <div className="security-list__container">
@@ -45,8 +61,12 @@ function SecurityList() {
         </li>
       </ul>
       {showInfo ? (
-        <div className="security--info">
-          tutaj info o kazdym zagrozeniu eldo
+        <div className="security-info__container">
+          <div className="security-info--close" onClick={closeInfo}>close</div>
+          <div className="security-info--title">{description[index].title}</div>
+          <div className="security-info--content">
+            {description[index].content}
+          </div>
         </div>
       ) : (
         ''
@@ -55,7 +75,12 @@ function SecurityList() {
   );
 
   function toggleInfo(index) {
-    setShowInfo(prev => !prev);
+    setShowInfo(true);
+    setIndex(index);
+  }
+
+  function closeInfo() {
+    setShowInfo(false);
   }
 }
 
