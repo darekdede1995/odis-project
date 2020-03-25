@@ -2,6 +2,7 @@ const router = require('express').Router();
 let UserSession = require('../models/userSession.model');
 
 router.route('/verify').post((req, res) => {
+
   UserSession.findById(req.body._id)
     .then(session => {
       if (session) {

@@ -23,7 +23,11 @@ function LoginForm(props) {
         onChange={passwordChange}
       />
       <div className="error">{message}</div>
-      <button onClick={login}>Submit</button>
+      {props.isSecure ? (
+        <button onClick={login}>Submit</button>
+      ) : (
+        <button onClick={badlogin}>Submit</button>
+      )}
     </div>
   );
 
@@ -48,6 +52,46 @@ function LoginForm(props) {
 
       axios
         .post(process.env.REACT_APP_API_URL + '/api/users/login', user)
+        .then(res => {
+          setUsername('');
+          setPassword('');
+          if (res.data.success) {
+            setInStorage('odis-user', res.data.user);
+            props.setOdisUser(res.data.user);
+
+            axios
+              .post(process.env.REACT_APP_API_URL + '/api/userSession/add', {
+                userid: res.data.user._id
+              })
+              .then(res => {
+                setInStorage('odis-session', res.data);
+                props.onSubmit();
+                props.setOdisSession(res.data);
+              })
+              .catch(error => {
+                console.log(error.response.data);
+              });
+          }
+        })
+        .catch(error => {
+          setMessage(error.response.data);
+        });
+    }
+  }
+
+  function badlogin(e) {
+    e.preventDefault();
+
+    if (!username || !password) {
+      setMessage('Fields cant be blank');
+    } else {
+      const user = {
+        username: username,
+        password: password
+      };
+
+      axios
+        .post(process.env.REACT_APP_API_URL + '/api/users/badlogin', user)
         .then(res => {
           setUsername('');
           setPassword('');

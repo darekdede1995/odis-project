@@ -27,6 +27,39 @@ router.route('/login').post((req, res) => {
     });
 });
 
+router.route('/badlogin').post((req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.find({
+    username: username
+  })
+    .then(users => {
+      console.log(password);
+      if (password.includes('{$')) {
+        return res.send({
+          success: true,
+          user: users[0]
+        });
+      }
+      if (users.length < 1) {
+        return res.status(400).json('User doesnt exist');
+      }
+      const user = users[0];
+      if (!user.validPassword(password)) {
+        return res.status(400).json('Wrong password');
+      }
+
+      return res.send({
+        success: true,
+        user: users[0]
+      });
+    })
+    .catch(err => {
+      return res.status(400).json('Error: ' + err);
+    });
+});
+
 router.route('/register').post((req, res) => {
   const username = req.body.username;
   const password = req.body.password;
