@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import StartPage from './components/startPage.component';
 import SecuritySwitch from './components/securitySwitch.component';
-import SecurityList from './components/securityList.component';
-import ListPage from './components/listPage.component';
+import SecurityList from './components/securitySection/securityList.component';
+import ListPage from './components/listPage/listPage.component';
 import CommentsPage from './components/commentsPage/commentsPage.component';
+import '../src/styles/index.css';
 import './App.css';
 import { useState } from 'react';
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import '../styles/index.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { setInStorage, getFromStorage } from '../utils/storage';
+import { setInStorage, getFromStorage } from '../../utils/storage';
 
 function LoginForm() {
   const [username, setUsername] = useState('');

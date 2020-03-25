@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/index.css';
 import axios from 'axios';
 import { useState } from 'react';
 

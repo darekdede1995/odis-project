@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import '../styles/index.css';
+import '../../styles/index.css';
 
 function SecurityList() {
   const [showInfo, setShowInfo] = useState(false);

@@ -1,8 +1,7 @@
 import React from 'react';
-import '../styles/index.css';
 import { useState } from 'react';
-import LoginForm from './loginForm.component';
-import RegisterForm from './registerForm.component';
+import LoginForm from './authSection/loginForm.component';
+import RegisterForm from './authSection/registerForm.component';
 import { Link } from 'react-router-dom';
 
 function StartPage() {

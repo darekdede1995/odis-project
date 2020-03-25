@@ -1,8 +1,7 @@
 import React from 'react';
-import '../styles/index.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { getFromStorage } from '../utils/storage';
+import { getFromStorage } from '../../utils/storage';
 import { useEffect } from 'react';
 
 function ListPage(props) {
