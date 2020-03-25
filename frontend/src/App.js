@@ -89,6 +89,10 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route
+              path="/comments"
+              component={() => <CommentsPage isSecure={secure} />}
+            />
+            <Route
               path="/list"
               component={() => <StartPage isSecure={secure} />}
             />
