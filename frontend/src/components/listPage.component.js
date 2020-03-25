@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { getFromStorage } from '../utils/storage';
 import { useEffect } from 'react';
 
-function ListPage() {
+function ListPage(props) {
   const [taskList, setTaskList] = useState([]);
   const [task, setTask] = useState('');
   const localStorage = getFromStorage('odis-token');
@@ -57,16 +57,30 @@ function ListPage() {
   }
 
   function getTasks() {
-    axios
-      .get(
-        process.env.REACT_APP_API_URL + '/api/tasks/' + localStorage.user._id
-      )
-      .then(res => {
-        setTaskList(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    if (props.isSecure) {
+      axios
+        .post(process.env.REACT_APP_API_URL + '/api/tasks/', localStorage.user)
+        .then(res => {
+          setTaskList(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      console.log(localStorage.user._id);
+      axios
+        .get(
+          process.env.REACT_APP_API_URL +
+            '/api/tasks/?userid=' +
+            localStorage.user._id
+        )
+        .then(res => {
+          setTaskList(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 
   function addTask() {
