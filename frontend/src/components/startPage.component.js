@@ -10,8 +10,13 @@ import { useEffect } from 'react';
 function StartPage() {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
-  const odisUser = getFromStorage('odis-user');
-  const odisSession = getFromStorage('odis-session');
+  const [odisUser, setOdisUser] = useState();
+  const [odisSession, setOdisSession] = useState();
+
+  useEffect(() => {
+    setOdisUser(getFromStorage('odis-user'));
+    setOdisSession(getFromStorage('odis-session'));
+  }, []);
 
   return (
     <div className="start-container">
@@ -50,7 +55,7 @@ function StartPage() {
         </button>
       </div>
       <div hidden={!login}>
-        <LoginForm />
+        <LoginForm onSubmit={loginToggle} setOdisUser={setOdisUser} setOdisSession={setOdisSession}/>
       </div>
       <div hidden={!register}>
         <RegisterForm onSubmit={loginToggle} />
@@ -74,18 +79,17 @@ function StartPage() {
 
   function logout(e) {
     e.preventDefault();
-    console.log(odisSession.userSession);
     axios
       .delete(
         process.env.REACT_APP_API_URL +
           '/api/userSession/' +
-          odisSession.userSession._id
+          odisSession._id
       )
       .then(res => {
         clearStorage('odis-user');
         clearStorage('odis-session');
-        odisUser = '';
-        odisSession = '';
+        setOdisUser('');
+        setOdisSession('');
       })
       .catch(error => {
         console.log(error);

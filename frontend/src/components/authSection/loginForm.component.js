@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { setInStorage, getFromStorage } from '../../utils/storage';
+import { setInStorage } from '../../utils/storage';
 
-function LoginForm() {
+function LoginForm(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -52,18 +52,17 @@ function LoginForm() {
           setUsername('');
           setPassword('');
           if (res.data.success) {
-            setInStorage('odis-user', {
-              user: res.data.user
-            });
+            setInStorage('odis-user', res.data.user);
+            props.setOdisUser(res.data.user);
 
             axios
               .post(process.env.REACT_APP_API_URL + '/api/userSession/add', {
                 userid: res.data.user._id
               })
               .then(res => {
-                setInStorage('odis-session', {
-                  userSession: res.data
-                });
+                setInStorage('odis-session', res.data);
+                props.onSubmit();
+                props.setOdisSession(res.data);
               })
               .catch(error => {
                 console.log(error.response.data);

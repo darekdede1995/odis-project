@@ -8,19 +8,31 @@ import CommentsPage from './components/commentsPage/commentsPage.component';
 import '../src/styles/index.css';
 import './App.css';
 import { getFromStorage } from './utils/storage';
+import axios from 'axios';
 import { useState } from 'react';
 
 function App() {
   const [secure, setSecure] = useState(true);
   const odisUser = getFromStorage('odis-user');
+  const odisSession = getFromStorage('odis-session');
 
-  return (
-    <div className="App">
-      <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
-      <SecurityList />
-      {logged(odisUser)}
-    </div>
-  );
+  if (secure) {
+    return (
+      <div className="App">
+        <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
+        <SecurityList />
+        {logged(verify())}
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
+        <SecurityList />
+        {logged(odisUser)}
+      </div>
+    );
+  }
 
   function toggleSecure(e) {
     e.preventDefault();
@@ -36,6 +48,23 @@ function App() {
       }
       return !prev;
     });
+  }
+
+  function verify() {
+    if (odisSession) {
+      axios
+        .post(process.env.REACT_APP_API_URL + '/api/userSession/verify', {
+          session: odisSession.userSession
+        })
+        .then(res => {
+          return res.data.success;
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    } else {
+      return false;
+    }
   }
 
   function logged(user) {
@@ -64,8 +93,8 @@ function App() {
           />
           <Switch>
             <Route
-              path="/comments"
-              component={() => <CommentsPage isSecure={secure} />}
+              path="/list"
+              component={() => <StartPage isSecure={secure} />}
             />
             <Route path="/" component={() => <StartPage isSecure={secure} />} />
           </Switch>

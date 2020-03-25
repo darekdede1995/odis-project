@@ -35,7 +35,7 @@
 }
 
 .security-list__container ul li:hover {
-  color: lightgray;
+  color: gray;
   cursor: pointer;
 }
 

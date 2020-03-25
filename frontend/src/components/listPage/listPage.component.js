@@ -58,7 +58,7 @@ function ListPage(props) {
   function getTasks() {
     if (props.isSecure) {
       axios
-        .post(process.env.REACT_APP_API_URL + '/api/tasks/', odisUser.user)
+        .post(process.env.REACT_APP_API_URL + '/api/tasks/', odisUser)
         .then(res => {
           setTaskList(res.data);
         })
@@ -66,12 +66,12 @@ function ListPage(props) {
           console.log(error);
         });
     } else {
-      console.log(odisUser.user._id);
+      console.log(odisUser._id);
       axios
         .get(
           process.env.REACT_APP_API_URL +
             '/api/tasks/?userid=' +
-            odisUser.user._id
+            odisUser._id
         )
         .then(res => {
           setTaskList(res.data);
@@ -85,7 +85,7 @@ function ListPage(props) {
   function addTask() {
     if (task) {
       const newTask = {
-        userid: odisUser.user._id,
+        userid: odisUser._id,
         description: task
       };
 
