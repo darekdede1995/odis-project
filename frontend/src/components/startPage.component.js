@@ -13,10 +13,7 @@ function StartPage() {
     <div className="start-container">
       <div className="button-group">
         <button>
-          <Link
-            to="/comments">
-            Komentarze
-          </Link>
+          <Link to="/comments">Komentarze</Link>
         </button>
         <button>
           <Link
@@ -25,18 +22,21 @@ function StartPage() {
                 ? 'nav-link selected-link'
                 : 'nav-link'
             }
-            to="/list">
+            to="/list"
+          >
             przycisk roboczy
           </Link>
         </button>
         <button
           className={login ? 'selected-button' : ''}
-          onClick={loginToggle}>
+          onClick={loginToggle}
+        >
           LOGIN
         </button>
         <button
           className={register ? 'selected-button' : ''}
-          onClick={registerToggle}>
+          onClick={registerToggle}
+        >
           REGISTER
         </button>
       </div>

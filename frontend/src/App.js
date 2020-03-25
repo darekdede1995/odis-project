@@ -6,21 +6,46 @@ import SecurityList from './components/securityList.component';
 import ListPage from './components/listPage.component';
 import CommentsPage from './components/commentsPage/commentsPage.component';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [secure, setSecure] = useState(true);
+
   return (
     <div className="App">
-      <SecuritySwitch />
+      <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
       <SecurityList />
       <BrowserRouter>
         <Switch>
-          <Route path="/comments" component={CommentsPage} />
-          <Route path="/list" component={ListPage} />
-          <Route path="/" component={StartPage} />
+          <Route
+            path="/comments"
+            component={() => <CommentsPage isSecure={secure} />}
+          />
+          <Route
+            path="/list"
+            component={() => <ListPage isSecure={secure} />}
+          />
+          <Route path="/" component={() => <StartPage isSecure={secure} />} />
         </Switch>
       </BrowserRouter>
     </div>
   );
+
+  function toggleSecure(e) {
+    e.preventDefault();
+    const html = document.querySelector('html');
+
+    setSecure(prev => {
+      if (prev) {
+        html.style.background = 'black';
+        html.style.filter = 'invert(1) hue-rotate(180deg)';
+      } else {
+        html.style.background = 'white';
+        html.style.filter = 'invert(0)  hue-rotate(0deg)';
+      }
+      return !prev;
+    });
+  }
 }
 
 export default App;
