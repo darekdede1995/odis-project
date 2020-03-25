@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Comment = require('../models/comment.model');
+const Comment = require('../models/comment.model');
 
 router.route('/add').post((req, res) => {
   const username = req.body.username;
@@ -14,6 +14,17 @@ router.route('/add').post((req, res) => {
     .save()
     .then(comment => res.json(comment))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/get').get(async (req, res) => {
+  const commentsList = [];
+
+  const comments = await Comment.find({});
+  comments.forEach(comment => {
+    commentsList.push(comment);
+  });
+
+  res.send(commentsList);
 });
 
 module.exports = router;
