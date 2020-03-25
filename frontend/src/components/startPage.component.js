@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { getFromStorage, clearStorage } from '../utils/storage';
 import { useEffect } from 'react';
 
-function StartPage() {
+function StartPage(props) {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [odisUser, setOdisUser] = useState();
@@ -55,7 +55,7 @@ function StartPage() {
         </button>
       </div>
       <div hidden={!login}>
-        <LoginForm onSubmit={loginToggle} setOdisUser={setOdisUser} setOdisSession={setOdisSession}/>
+        <LoginForm onSubmit={loginToggle} setOdisUser={setOdisUser} setOdisSession={setOdisSession} isSecure={props.isSecure}/>
       </div>
       <div hidden={!register}>
         <RegisterForm onSubmit={loginToggle} />

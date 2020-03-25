@@ -8,7 +8,7 @@ function SecurityList() {
 
   const description = [
     {},
-    { title: 'SQL Injections', content: 'Wstrzykiwanie SQL' },
+    { title: 'noSQL Injections', content: 'Wstrzykiwanie SQL' },
     { title: 'Cross Site Scripting (XSS)', content: '' },
     {
       title: 'Broken Authentication & Session Management - IdentityManager',
