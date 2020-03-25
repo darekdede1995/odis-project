@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../styles/index.css';
 import axios from 'axios';
 import { useState } from 'react';
+import '../../styles/index.css';
 
-function AddCommentForm() {
+function AddCommentForm(props) {
   const [username, setUsername] = useState('');
   const [content, setContent] = useState('');
 
@@ -34,8 +34,6 @@ function AddCommentForm() {
   }
 
   function addComment(e) {
-    //e.preventDefault();
-
     if (!username || !content) {
       alert('Fields cannot be blank');
     } else {
@@ -46,9 +44,7 @@ function AddCommentForm() {
 
       axios
         .post(process.env.REACT_APP_API_URL + '/api/comments/add', comment)
-        .then(() => {
-          setContent('');
-        });
+        .then(() => props.refreshCommentsList());
     }
   }
 }

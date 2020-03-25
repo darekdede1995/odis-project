@@ -1,8 +1,19 @@
 import React from 'react';
 import '../../styles/index.css';
+import Comment from './comment.component';
 
-function CommentsList() {
-  return <div>xD</div>;
+function CommentsList(props) {
+  return (
+    <div>
+      {props.commentsList.map(comment => (
+        <Comment
+          username={comment.username}
+          content={comment.content}
+          key={comment._id}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default CommentsList;
