@@ -7,28 +7,18 @@ import ListPage from './components/listPage/listPage.component';
 import CommentsPage from './components/commentsPage/commentsPage.component';
 import '../src/styles/index.css';
 import './App.css';
+import { getFromStorage } from './utils/storage';
 import { useState } from 'react';
 
 function App() {
   const [secure, setSecure] = useState(true);
+  const localStorage = getFromStorage('odis-token');
 
   return (
     <div className="App">
       <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
       <SecurityList />
-      <BrowserRouter>
-        <Switch>
-          <Route
-            path="/comments"
-            component={() => <CommentsPage isSecure={secure} />}
-          />
-          <Route
-            path="/list"
-            component={() => <ListPage isSecure={secure} />}
-          />
-          <Route path="/" component={() => <StartPage isSecure={secure} />} />
-        </Switch>
-      </BrowserRouter>
+      {logged(localStorage)}
     </div>
   );
 
@@ -46,6 +36,34 @@ function App() {
       }
       return !prev;
     });
+  }
+
+  function logged(user) {
+    if (user) {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route
+              path="/comments"
+              component={() => <CommentsPage isSecure={secure} />}
+            />
+            <Route
+              path="/list"
+              component={() => <ListPage isSecure={secure} />}
+            />
+            <Route path="/" component={() => <ListPage isSecure={secure} />} />
+          </Switch>
+        </BrowserRouter>
+      );
+    } else {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={() => <StartPage isSecure={secure} />} />
+          </Switch>
+        </BrowserRouter>
+      );
+    }
   }
 }
 
