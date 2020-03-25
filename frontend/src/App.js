@@ -12,13 +12,13 @@ import { useState } from 'react';
 
 function App() {
   const [secure, setSecure] = useState(true);
-  const localStorage = getFromStorage('odis-token');
+  const odisUser = getFromStorage('odis-user');
 
   return (
     <div className="App">
       <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
       <SecurityList />
-      {logged(localStorage)}
+      {logged(odisUser)}
     </div>
   );
 
@@ -51,7 +51,7 @@ function App() {
               path="/list"
               component={() => <ListPage isSecure={secure} />}
             />
-            <Route path="/" component={() => <ListPage isSecure={secure} />} />
+            <Route path="/" component={() => <StartPage isSecure={secure} />} />
           </Switch>
         </BrowserRouter>
       );
@@ -59,6 +59,10 @@ function App() {
       return (
         <BrowserRouter>
           <Switch>
+            <Route
+              path="/comments"
+              component={() => <CommentsPage isSecure={secure} />}
+            />
             <Route path="/" component={() => <StartPage isSecure={secure} />} />
           </Switch>
         </BrowserRouter>

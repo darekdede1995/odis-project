@@ -4,7 +4,7 @@ function SecuritySwitch(props) {
   return (
     <div className="security__container">
       <button onClick={props.toggleSecure}>
-        {props.isSecure ? 'SECURE' : 'UNSECURE'}
+        {props.isSecure ? 'Secure' : 'Unsecure'}
       </button>
     </div>
   );

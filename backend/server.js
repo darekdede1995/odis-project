@@ -25,10 +25,12 @@ connection.once('open', () => {
 
 const userRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');
+const userSessionRoutes = require('./routes/userSession');
 const commentsRoutes = require('./routes/comments');
 
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', tasksRoutes);
+app.use('/api/userSession', userSessionRoutes);
 app.use('/api/comments', commentsRoutes);
 
 if (process.env.NODE_ENV === 'production') {

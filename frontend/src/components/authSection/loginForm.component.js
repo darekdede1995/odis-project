@@ -7,7 +7,6 @@ function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const localStorage = getFromStorage('odis-token');
 
   return (
     <div className="login-container">
@@ -24,7 +23,7 @@ function LoginForm() {
         onChange={passwordChange}
       />
       <div className="error">{message}</div>
-      <button onClick={login}>SUMBIT</button>
+      <button onClick={login}>Submit</button>
     </div>
   );
 
@@ -53,9 +52,22 @@ function LoginForm() {
           setUsername('');
           setPassword('');
           if (res.data.success) {
-            setInStorage('odis-token', {
+            setInStorage('odis-user', {
               user: res.data.user
             });
+
+            axios
+              .post(process.env.REACT_APP_API_URL + '/api/userSession/add', {
+                userid: res.data.user._id
+              })
+              .then(res => {
+                setInStorage('odis-session', {
+                  userSession: res.data
+                });
+              })
+              .catch(error => {
+                console.log(error.response.data);
+              });
           }
         })
         .catch(error => {
