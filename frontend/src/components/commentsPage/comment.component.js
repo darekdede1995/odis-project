@@ -5,7 +5,7 @@ function Comment(props) {
   return (
     <div>
       <div>{props.username}</div>
-      <p>{props.content}</p>
+      <p dangerouslySetInnerHTML={{ __html: props.content }}></p>
     </div>
   );
 }
