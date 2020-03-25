@@ -60,6 +60,7 @@
 
 .security-info--content {
   font-size: 1.2em;
+  white-space: pre-wrap;
 }
 
 .error {

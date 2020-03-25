@@ -16,7 +16,8 @@ function SecurityList() {
     },
     {
       title: 'Insecure Direct Object References - DOM (Document Object Model)',
-      content: ''
+      content:
+        'Niechronione bezpośrednie odwołania do obiektów (IDOR) są rodzajem luki w kontroli dostępu, która powstaje, gdy aplikacja korzysta z wejścia dostarczonego przez użytkownika do bezpośredniego dostępu do obiektów. \n\nRozważmy stronę internetową, która używa następującego adresu URL, aby uzyskać dostęp do strony konta klienta, poprzez pobieranie informacji z bazy danych: https://insecure-website.com/customer_account?customer_number=132355 Jest to wysoce nieodpowiednie podejście. W naszym przypadku strony niechronionej zadania użytkownika właśnie w ten sposób są pobierane. Aby pobrać wszystkie zadania z bazy wystarczy w adres:\n\nhttp://localhost:5000/api/tasks/?userid=5e7a117dd1af1149ccedd889\n\nzamienic na adres:\n\nhttp://localhost:5000/api/tasks/?\n\nAby zapobiec takiemu postępowaniu należy:\n-pobierać dane metodą POST\n-zabezpieczyć serwer przed pustymi zapytaniami query\n '
     },
     { title: 'Cross-Site Request Forgery (CSRF)', content: '' }
   ];
@@ -62,7 +63,9 @@ function SecurityList() {
       </ul>
       {showInfo ? (
         <div className="security-info__container">
-          <div className="security-info--close" onClick={closeInfo}>close</div>
+          <div className="security-info--close" onClick={closeInfo}>
+            close
+          </div>
           <div className="security-info--title">{description[index].title}</div>
           <div className="security-info--content">
             {description[index].content}
