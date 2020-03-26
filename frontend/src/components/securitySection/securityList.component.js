@@ -8,7 +8,7 @@ function SecurityList() {
 
   const description = [
     {},
-    { title: 'noSQL Injections', content: 'Wstrzykiwanie SQL' },
+    { title: 'noSQL Injections', content: 'NoSQL injections enable an attacker to inject code into the query that would be executed by the database. These flaws are introduced when software developers create dynamic database queries that include user supplied input\n\n In MongoDB, $gtselects those documents where the value of the field is greater than (i.e. >) the specified value. Thus above statement compares password in database with empty string for greatness, which returns true.\n\nWhen you type {$gt: ""} in place of the password, it will always be true and will allow the hacker to hack in.\n\nTo prevent you should: \n\nValidate inputs to detect malicious values\n\nTo minimize the potential damage of a successful injection attack, do not assign DBA or admin type access rights to your application accounts. Similarly minimize the privileges of the operating system account that the database process runs under.\n\nBuild your noSQL queries so that they are not sent directly to the database' },
     { title: 'Cross Site Scripting (XSS)', content: '' },
     {
       title: 'Broken Authentication & Session Management - IdentityManager',
