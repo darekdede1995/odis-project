@@ -3,9 +3,7 @@ const router = require('express').Router();
 let Task = require('../models/task.model');
 
 router.route('/').get((req, res) => {
-  Task.find({
-    userid: req.query.userid
-  })
+  Task.find(req.query)
     .then(tasks => res.json(tasks))
     .catch(err => res.status(400).json('Error: ' + err));
 });
