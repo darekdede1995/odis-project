@@ -10,6 +10,7 @@ function CommentsList(props) {
           username={comment.username}
           content={comment.content}
           key={comment._id}
+          isSecure={props.isSecure}
         />
       ))}
     </div>

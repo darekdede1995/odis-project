@@ -5,7 +5,7 @@ import '../../styles/index.css';
 import AddCommentForm from './addCommentForm.component';
 import CommentsList from './commentsList.component';
 
-function CommentsPage() {
+function CommentsPage(props) {
   const [commentsListState, setCommentsListState] = useState([]);
   refreshCommentsList();
 
@@ -19,7 +19,9 @@ function CommentsPage() {
     <div>
       <AddCommentForm
         refreshCommentsList={refreshCommentsList}></AddCommentForm>
-      <CommentsList commentsList={commentsListState}></CommentsList>
+      <CommentsList
+        commentsList={commentsListState}
+        isSecure={props.isSecure}></CommentsList>
     </div>
   );
 }
