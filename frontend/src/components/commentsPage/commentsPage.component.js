@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import '../../styles/index.css';
@@ -7,7 +7,10 @@ import CommentsList from './commentsList.component';
 
 function CommentsPage(props) {
   const [commentsListState, setCommentsListState] = useState([]);
-  refreshCommentsList();
+
+  useEffect(() => {
+    refreshCommentsList();
+  }, []);
 
   function refreshCommentsList() {
     axios.get(process.env.REACT_APP_API_URL + '/api/comments/get').then(res => {
