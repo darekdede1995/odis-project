@@ -19,7 +19,7 @@ function CommentsPage(props) {
   }
 
   return (
-    <div>
+    <div className="comments-page">
       <AddCommentForm
         refreshCommentsList={refreshCommentsList}></AddCommentForm>
       <CommentsList

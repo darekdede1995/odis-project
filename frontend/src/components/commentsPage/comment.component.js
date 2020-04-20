@@ -9,7 +9,7 @@ function Comment(props) {
   );
 
   return (
-    <div>
+    <div className="comment">
       <div>{props.username}</div>
       {contentSection}
     </div>
