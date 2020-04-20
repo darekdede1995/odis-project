@@ -31,10 +31,10 @@ test('renders comments elements', () => {
   expect(commentsElement).toBeInTheDocument();
 });
 
-test('renders secure elements', () => {
-  const { getByText } = render(<App />);
+// test('renders secure elements', () => {
+//   const { getByText } = render(<App />);
 
-  const secureElement = getByText(/secure/i);
+//   const secureElement = getByText(/secure/i);
 
-  expect(secureElement).toBeInTheDocument();
-});
+//   expect(secureElement).toBeInTheDocument();
+// });
