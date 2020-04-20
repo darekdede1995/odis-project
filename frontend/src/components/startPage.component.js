@@ -55,7 +55,12 @@ function StartPage(props) {
         </button>
       </div>
       <div hidden={!login}>
-        <LoginForm onSubmit={loginToggle} setOdisUser={setOdisUser} setOdisSession={setOdisSession} isSecure={props.isSecure}/>
+        <LoginForm
+          onSubmit={loginToggle}
+          setOdisUser={setOdisUser}
+          setOdisSession={setOdisSession}
+          isSecure={props.isSecure}
+        />
       </div>
       <div hidden={!register}>
         <RegisterForm onSubmit={loginToggle} />
@@ -81,17 +86,16 @@ function StartPage(props) {
     e.preventDefault();
     axios
       .delete(
-        process.env.REACT_APP_API_URL +
-          '/api/userSession/' +
-          odisSession._id
+        process.env.REACT_APP_API_URL + '/api/userSession/' + odisSession._id
       )
-      .then(res => {
+      .then((res) => {
         clearStorage('odis-user');
         clearStorage('odis-session');
         setOdisUser('');
         setOdisSession('');
+        window.location.reload();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
