@@ -7,7 +7,7 @@ router.route('/add').post((req, res) => {
 
   const newComment = new Comment({
     username: username,
-    content: content
+    content: content,
   });
 
   newComment
@@ -25,6 +25,10 @@ router.route('/get').get(async (req, res) => {
   });
 
   res.send(commentsList);
+});
+
+router.route('/removeAll').delete((req, res) => {
+  Comment.deleteMany({}, err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;

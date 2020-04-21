@@ -10,7 +10,7 @@ test('Insecure <Comment /> will inject script', async () => {
   await page.goto('http://localhost:3000/comments');
 
   let unsecureComment =
-    '<img src="https://placeimgxxx.com/320/320/any" onerror=\'alert("xss injection")\'>';
+    '<img src="https://placeimgxxx.com/320/320/any" onerror="document.querySelector(\'.comment:last-of-type\').style.backgroundColor=\'#ff0000\'">';
 
   await page.click('.security__container > button');
   await page.click('.comments-form > input');
@@ -18,6 +18,9 @@ test('Insecure <Comment /> will inject script', async () => {
   await page.click('.comments-form > textarea');
   await page.type('.comments-form > textarea', unsecureComment);
   await page.click('.comments-form > button');
-  //const finalText = await page.$eval('.user-item', el => el.textContent);
-  // expect(finalText).toBe('Anna (28 years old)');
-}, 1000);
+  const color = await page.$eval(
+    '.comment:last-of-type',
+    el => el.style.backgroundColor
+  );
+  expect(color).toBe('rgb(255, 0, 0)');
+}, 1000000);
