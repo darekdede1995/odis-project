@@ -7,9 +7,9 @@ function Comment(props) {
   ) : (
     <p dangerouslySetInnerHTML={{ __html: props.content }}></p>
   );
-
+  
   return (
-    <div>
+    <div className="comment">
       <div>{props.username}</div>
       {contentSection}
     </div>

@@ -47,12 +47,12 @@ function LoginForm(props) {
     } else {
       const user = {
         username: username,
-        password: password
+        password: password,
       };
 
       axios
         .post(process.env.REACT_APP_API_URL + '/api/users/login', user)
-        .then(res => {
+        .then((res) => {
           setUsername('');
           setPassword('');
           if (res.data.success) {
@@ -61,19 +61,20 @@ function LoginForm(props) {
 
             axios
               .post(process.env.REACT_APP_API_URL + '/api/userSession/add', {
-                userid: res.data.user._id
+                userid: res.data.user._id,
               })
-              .then(res => {
+              .then((res) => {
                 setInStorage('odis-session', res.data);
                 props.onSubmit();
                 props.setOdisSession(res.data);
+                window.location.reload();
               })
-              .catch(error => {
+              .catch((error) => {
                 console.log(error.response.data);
               });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           setMessage(error.response.data);
         });
     }
@@ -87,12 +88,12 @@ function LoginForm(props) {
     } else {
       const user = {
         username: username,
-        password: password
+        password: password,
       };
 
       axios
         .post(process.env.REACT_APP_API_URL + '/api/users/badlogin', user)
-        .then(res => {
+        .then((res) => {
           setUsername('');
           setPassword('');
           if (res.data.success) {
@@ -101,19 +102,19 @@ function LoginForm(props) {
 
             axios
               .post(process.env.REACT_APP_API_URL + '/api/userSession/add', {
-                userid: res.data.user._id
+                userid: res.data.user._id,
               })
-              .then(res => {
+              .then((res) => {
                 setInStorage('odis-session', res.data);
                 props.onSubmit();
                 props.setOdisSession(res.data);
               })
-              .catch(error => {
+              .catch((error) => {
                 console.log(error.response.data);
               });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           setMessage(error.response.data);
         });
     }

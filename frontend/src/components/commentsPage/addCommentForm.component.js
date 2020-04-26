@@ -8,14 +8,14 @@ function AddCommentForm(props) {
   const [content, setContent] = useState('');
 
   return (
-    <div>
+    <div className="comments-form">
       <input
         value={username}
         type="text"
-        placeholder="username"
+        placeholder="Username"
         onChange={usernameChange}
       />
-      <input
+      <textarea
         value={content}
         type="text"
         placeholder="Enter your comment here..."
@@ -39,7 +39,7 @@ function AddCommentForm(props) {
     } else {
       const comment = {
         username: username,
-        content: content
+        content: content,
       };
 
       axios

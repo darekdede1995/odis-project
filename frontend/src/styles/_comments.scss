@@ -1,0 +1,64 @@
+@mixin containter {
+  border: 2px solid lightgray;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow-wrap: break-word;
+  text-align: start;
+  padding: 10px;
+}
+
+.comments-page {
+  width: 100%;
+}
+
+.comments-form {
+  @include containter();
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  input {
+    @include containter();
+    margin-bottom: 10px;
+    width: 50%;
+    font-size: 14px;
+  }
+
+  textarea {
+    @include containter();
+    overflow: auto;
+    resize: none;
+    font-family: inherit;
+
+    height: 3rem;
+    word-break: break-all;
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 20px;
+    width: 200px;
+    align-self: flex-end;
+  }
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 40px auto;
+}
+
+.comment {
+  @include containter();
+
+  div {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 0px;
+  }
+}

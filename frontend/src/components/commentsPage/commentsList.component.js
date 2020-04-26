@@ -4,7 +4,7 @@ import Comment from './comment.component';
 
 function CommentsList(props) {
   return (
-    <div>
+    <div className="comments-list">
       {props.commentsList.map(comment => (
         <Comment
           username={comment.username}
