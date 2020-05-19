@@ -84,20 +84,28 @@ function StartPage(props) {
 
   function logout(e) {
     e.preventDefault();
-    axios
-      .delete(
-        process.env.REACT_APP_API_URL + '/api/userSession/' + odisSession._id
-      )
-      .then((res) => {
-        clearStorage('odis-user');
-        clearStorage('odis-session');
-        setOdisUser('');
-        setOdisSession('');
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (odisSession) {
+      axios
+        .delete(
+          process.env.REACT_APP_API_URL + '/api/userSession/' + odisSession._id
+        )
+        .then((res) => {
+          clearStorage('odis-user');
+          clearStorage('odis-session');
+          setOdisUser('');
+          setOdisSession('');
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      clearStorage('odis-user');
+      clearStorage('odis-session');
+      setOdisUser('');
+      setOdisSession('');
+      window.location.reload();
+    }
   }
 }
 

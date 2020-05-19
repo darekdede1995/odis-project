@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, queryByAttribute } from '@testing-library/react';
 import App from './App';
 
 test('renders login element', () => {
@@ -31,10 +31,38 @@ test('renders comments elements', () => {
   expect(commentsElement).toBeInTheDocument();
 });
 
-// test('renders secure elements', () => {
-//   const { getByText } = render(<App />);
+test('login as admin - unsecure', () => {
+  const { getAllByPlaceholderText, getByText, getAllByText } = render(<App />);
 
-//   const secureElement = getByText(/secure/i);
+  const secureElement = getByText('Secure').click();
+  const loginButton = getByText('Login');
+  const loginUsernameInput = getAllByPlaceholderText('username')[0]; 
+  const loginPasswordInput = getAllByPlaceholderText('password')[0];
 
-//   expect(secureElement).toBeInTheDocument();
-// });
+  const unsecureElement = getByText('Unsecure');
+
+  loginUsernameInput.value = 'admin'; 
+  loginPasswordInput.value = '{$gt: ""}';
+
+  const submitElement = getAllByText('Submit')[0].click(); 
+
+  let logoutButton = getByText('Logout'); 
+  expect(logoutButton).toBeInTheDocument();
+  
+});
+
+test('login as admin - secure', () => {
+  const { getAllByPlaceholderText, getByText, getAllByText } = render(<App />);
+
+  const loginButton = getByText('Login');
+  const loginUsernameInput = getAllByPlaceholderText('username')[0]; 
+  const loginPasswordInput = getAllByPlaceholderText('password')[0];
+
+  loginUsernameInput.value = 'admin'; 
+  loginPasswordInput.value = 'admin';
+
+  const submitElement = getAllByText('Submit')[0].click(); 
+
+    let logoutButton = getByText('Logout'); 
+  expect(logoutButton).toBeInTheDocument();
+});

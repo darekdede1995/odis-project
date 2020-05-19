@@ -11,12 +11,14 @@ function LoginForm(props) {
   return (
     <div className="login-container">
       <input
+      id='loginUsername'
         value={username}
         type="text"
         placeholder="username"
         onChange={usernameChange}
       />
       <input
+      id='loginPassword'
         value={password}
         type="password"
         placeholder="password"
