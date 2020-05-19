@@ -47,7 +47,7 @@ test('login as admin - unsecure', () => {
   const submitElement = getAllByText('Submit')[0].click(); 
 
   let logoutButton = getByText('Logout'); 
-  expect(logoutButton).toBeInTheDocument();
+  expect(logoutButton).not.toBeInTheDocument();
   
 });
 
@@ -59,10 +59,10 @@ test('login as admin - secure', () => {
   const loginPasswordInput = getAllByPlaceholderText('password')[0];
 
   loginUsernameInput.value = 'admin'; 
-  loginPasswordInput.value = 'admin';
+  loginPasswordInput.value = '{$gt: ""}';
 
   const submitElement = getAllByText('Submit')[0].click(); 
 
     let logoutButton = getByText('Logout'); 
-  expect(logoutButton).toBeInTheDocument();
-});
+  expect(logoutButton).toBeInTheDocument(); 
+}); 
