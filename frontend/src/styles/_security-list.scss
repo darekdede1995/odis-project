@@ -5,14 +5,19 @@
 }
 
 .security-info__container {
-  border: 1px solid black;
+  border: 1px solid #ccc;
   position: absolute;
   top: 18vh;
   left: 18vw;
   width: 60vw;
-  height: 60vh;
-  padding: 2%;
+  height: auto;
+  padding: 16px;
   background-color: white;
+
+  z-index: 500;
+  box-shadow: 1px 1px 1px black;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
 }
 
 .security-list__container ul li {
