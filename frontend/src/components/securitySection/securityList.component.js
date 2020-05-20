@@ -44,9 +44,6 @@ function SecurityList() {
       </ul>
 
       <Modal show={showInfo} modalClosed={closeInfo}>
-        <div className="security-info--close" onClick={closeInfo}>
-          close
-        </div>
         <div className="security-info--title">{description[index].title}</div>
         <div className="security-info--content">
           {description[index].content}

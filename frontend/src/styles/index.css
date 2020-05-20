@@ -46,21 +46,8 @@
   cursor: pointer;
 }
 
-.security-info--close {
-  position: relative;
-  display: inline-block;
-  left: 0;
-  top: 0;
-  border-bottom: solid 3px white;
-  margin-bottom: 2%;
-}
-
-.security-info--close:hover {
-  cursor: pointer;
-  border-bottom: solid 3px black;
-}
-
 .security-info--title {
+  margin-top: 10px;
   font-size: 2em;
   margin-bottom: 1%;
 }
@@ -68,6 +55,7 @@
 .security-info--content {
   font-size: 1.2em;
   white-space: pre-wrap;
+  margin: 30px auto;
 }
 
 .error {
