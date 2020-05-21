@@ -27,7 +27,7 @@ test('Comment with <img> should not inject script', async () => {
   const page = await sendUnsecureComment(unsecureComment);
   const cookies = await page.cookies();
 
-  expect(cookies.find(c => c.name === testCookie)).toBeFalsy();
+  expect(cookies.find((c) => c.name === testCookie)).toBeFalsy();
 }, 1000000);
 
 test('Comment with <script> should not inject script', async () => {
@@ -39,7 +39,7 @@ test('Comment with <script> should not inject script', async () => {
   const page = await sendUnsecureComment(unsecureComment);
   const cookies = await page.cookies();
 
-  expect(cookies.find(c => c.name === testCookie)).toBeFalsy();
+  expect(cookies.find((c) => c.name === testCookie)).toBeFalsy();
 }, 1000000);
 
 test('Comment with <button> should not inject clickable button with script', async () => {
@@ -47,11 +47,11 @@ test('Comment with <button> should not inject clickable button with script', asy
   const unsecureComment = ` <button 
                               class="test-button-${testCookie}"
                               onclick="document.cookie=\'${testCookie}=0\'"
-                            >`;
+                            />`;
 
   const page = await sendUnsecureComment(unsecureComment);
   await expect(page.click(`.test-button-${testCookie}`)).rejects.toThrow();
   const cookies = await page.cookies();
 
-  expect(cookies.find(c => c.name === testCookie)).toBeFalsy();
+  expect(cookies.find((c) => c.name === testCookie)).toBeFalsy();
 }, 1000000);
