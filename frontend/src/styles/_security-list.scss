@@ -6,13 +6,15 @@
 
 .security-info__container {
   border: 1px solid #ccc;
-  position: fixed;
+  position: absolute;
   top: 18vh;
   left: 18vw;
   width: 60vw;
   height: auto;
+  max-height: 64vh;
   padding: 16px;
   background-color: white;
+  overflow-y: scroll;
 
   z-index: 500;
   box-shadow: 1px 1px 1px black;
@@ -34,11 +36,11 @@
 
 .security-info--title {
   margin-top: 10px;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 1%;
 }
 .security-info--content {
-  font-size: 1.2em;
+  font-size: 1em;
   white-space: pre-wrap;
   margin: 30px auto;
 }
