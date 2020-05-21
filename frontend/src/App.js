@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import StartPage from './components/startPage.component';
 import SecuritySwitch from './components/securitySwitch.component';
 import SecurityList from './components/securitySection/securityList.component';
@@ -22,29 +22,24 @@ function App() {
     verify();
   }, []);
 
-  if (secure) {
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <button className="button__mainpage">
+          <Link to="/">Main Page</Link>
+        </button>
         <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
         <SecurityList />
-        {logged(verified)}
-      </div>
-    );
-  } else {
-    return (
-      <div className="App">
-        <SecuritySwitch isSecure={secure} toggleSecure={toggleSecure} />
-        <SecurityList />
-        {logged(odisUser)}
-      </div>
-    );
-  }
+        {secure ? logged(verified) : logged(odisUser)}
+      </BrowserRouter>
+    </div>
+  );
 
   function toggleSecure(e) {
     e.preventDefault();
     const html = document.querySelector('html');
 
-    setSecure(prev => {
+    setSecure((prev) => {
       if (prev) {
         html.style.background = 'black';
         html.style.filter = 'invert(1) hue-rotate(180deg)';
@@ -63,10 +58,10 @@ function App() {
           process.env.REACT_APP_API_URL + '/api/userSession/verify',
           odisSession
         )
-        .then(res => {
+        .then((res) => {
           setVerified(res.data.success);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response.data);
         });
     } else {
@@ -75,39 +70,25 @@ function App() {
   }
 
   function logged(user) {
-    if (user) {
-      return (
-        <BrowserRouter>
-          <Switch>
-            <Route
-              path="/comments"
-              component={() => <CommentsPage isSecure={secure} />}
-            />
-            <Route
-              path="/list"
-              component={() => <ListPage isSecure={secure} />}
-            />
-            <Route path="/" component={() => <StartPage isSecure={secure} />} />
-          </Switch>
-        </BrowserRouter>
-      );
-    } else {
-      return (
-        <BrowserRouter>
-          <Switch>
-            <Route
-              path="/comments"
-              component={() => <CommentsPage isSecure={secure} />}
-            />
-            <Route
-              path="/list"
-              component={() => <StartPage isSecure={secure} />}
-            />
-            <Route path="/" component={() => <StartPage isSecure={secure} />} />
-          </Switch>
-        </BrowserRouter>
-      );
-    }
+    return (
+      <Switch>
+        <Route
+          path="/comments"
+          component={() => <CommentsPage isSecure={secure} />}
+        />
+        <Route
+          path="/list"
+          component={() =>
+            user ? (
+              <ListPage isSecure={secure} />
+            ) : (
+              <StartPage isSecure={secure} />
+            )
+          }
+        />
+        <Route path="/" component={() => <StartPage isSecure={secure} />} />
+      </Switch>
+    );
   }
 }
 
