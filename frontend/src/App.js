@@ -41,11 +41,11 @@ function App() {
 
     setSecure((prev) => {
       if (prev) {
-        html.style.background = 'black';
-        html.style.filter = 'invert(1) hue-rotate(180deg)';
+        html.style.background = 'darkgray';
+        html.style.color = 'black';
       } else {
         html.style.background = 'white';
-        html.style.filter = 'invert(0)  hue-rotate(0deg)';
+        html.style.color = 'black';
       }
       return !prev;
     });
