@@ -1,9 +1,12 @@
 .security__container {
+  box-sizing: border-box;
+  height: 75px;
   position: absolute;
   top: 5vh;
   right: 5vw;
 
   button {
     padding: 10px;
+    min-width: 150px;
   }
 }

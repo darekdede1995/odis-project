@@ -56,6 +56,8 @@ button {
 }
 
 .button__mainpage {
+  box-sizing: border-box;
+  height: 75px;
   position: absolute;
   top: 5vh;
   left: 5vw;
