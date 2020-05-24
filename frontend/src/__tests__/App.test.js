@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, queryByAttribute } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 
 test('renders login element', () => {
   const { getByText } = render(<App />);

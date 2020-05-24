@@ -15,7 +15,7 @@ function SecurityList() {
           onClick={() => {
             toggleInfo(1);
           }}>
-          SQL Injections
+          noSQL Injections
         </li>
         <li
           onClick={() => {

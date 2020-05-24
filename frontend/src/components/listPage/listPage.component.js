@@ -16,13 +16,12 @@ function ListPage(props) {
   return (
     <div className="tasks-container">
       <div className="task-container">
-        {taskList.map(task => {
+        {taskList.map((task) => {
           return (
             <div className="task" key={task._id}>
               <div
                 className="task-description"
-                style={{ textDecoration: task.finished ? 'line-through' : '' }}
-              >
+                style={{ textDecoration: task.finished ? 'line-through' : '' }}>
                 {task.description}
               </div>
               <div id="done" className="action" onClick={() => markTask(task)}>
@@ -31,8 +30,7 @@ function ListPage(props) {
               <div
                 id="delete"
                 className="action"
-                onClick={() => removeTask(task)}
-              >
+                onClick={() => removeTask(task)}>
                 -
               </div>
             </div>
@@ -59,23 +57,21 @@ function ListPage(props) {
     if (props.isSecure) {
       axios
         .post(process.env.REACT_APP_API_URL + '/api/tasks/', odisUser)
-        .then(res => {
+        .then((res) => {
           setTaskList(res.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     } else {
       axios
         .get(
-          process.env.REACT_APP_API_URL +
-            '/api/tasks/?userid=' +
-            odisUser._id
+          process.env.REACT_APP_API_URL + '/api/tasks/?userid=' + odisUser._id
         )
-        .then(res => {
+        .then((res) => {
           setTaskList(res.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -85,18 +81,18 @@ function ListPage(props) {
     if (task) {
       const newTask = {
         userid: odisUser._id,
-        description: task
+        description: task,
       };
 
       axios
         .post(process.env.REACT_APP_API_URL + '/api/tasks/add', newTask)
-        .then(res => {
+        .then((res) => {
           setTask('');
           const updatedTaskList = JSON.parse(JSON.stringify(taskList));
           updatedTaskList.push(res.data);
           setTaskList(updatedTaskList);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -105,13 +101,13 @@ function ListPage(props) {
   function removeTask(task) {
     axios
       .delete(process.env.REACT_APP_API_URL + '/api/tasks/' + task._id)
-      .then(res => {
+      .then((res) => {
         const updatedTaskList = JSON.parse(JSON.stringify(taskList)).filter(
-          task => task._id !== res.data
+          (task) => task._id !== res.data
         );
         setTaskList(updatedTaskList);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -119,17 +115,17 @@ function ListPage(props) {
   function markTask(task) {
     axios
       .post(process.env.REACT_APP_API_URL + '/api/tasks/update/' + task._id, {
-        finished: !task.finished
+        finished: !task.finished,
       })
-      .then(res => {
+      .then((res) => {
         const updatedTaskList = JSON.parse(JSON.stringify(taskList)).filter(
-          task => task._id !== res.data._id
+          (task) => task._id !== res.data._id
         );
         updatedTaskList.push(res.data);
 
         setTaskList(updatedTaskList);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }

@@ -8,7 +8,6 @@ async function sendUnsecureComment(comment, author = 'Haker') {
   });
   const page = await browser.newPage();
   await page.goto('http://localhost:3000/comments');
-  await page.click('.security__container > button');
   await page.click('.comments-form > input');
   await page.type('.comments-form > input', String(author));
   await page.click('.comments-form > textarea');
@@ -64,6 +63,22 @@ test('Comment with <button> should not inject clickable button with script', asy
   );
   await expect(page.click(`.test-button-${testId}`)).rejects.toThrow();
 
+  const scriptInjectedElements = await page.$x(`//div[@id='${testId}']`);
+  expect(scriptInjectedElements).toHaveLength(0);
+}, 1000000);
+
+test('Element <a> should not inject script', async () => {
+  const testId = Date.now();
+  const testScript = `var el = document.createElement(\'div\');el.id=\'${testId}\';document.querySelector(\'body\').appendChild(el)`;
+
+  const unsecureComment = ` <a
+                              href="javascript: (function (){${testScript}})()"
+                            >KLIKNIJ</a>`;
+
+  const page = await sendUnsecureComment(unsecureComment, testId);
+  await page.waitForXPath(
+    `//div[@class='comment']/div[contains(., '${testId}')]`
+  );
   const scriptInjectedElements = await page.$x(`//div[@id='${testId}']`);
   expect(scriptInjectedElements).toHaveLength(0);
 }, 1000000);
